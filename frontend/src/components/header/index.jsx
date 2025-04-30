@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils';
 import { UserButton } from '../user-button';
 
 const Header = () => {
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   const { pathname } = useLocation();
   const isAuthPage = pathname.includes('auth');
   return (

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 // Replace with your backend API URL
-const BASE_URL = 'http://localhost:5000/api'; 
+const BASE_URL = 'http://localhost:5050/api'; 
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -18,14 +18,14 @@ export const authApi = createApi({
   endpoints: builder => ({
     login: builder.mutation({
       query: credentials => ({
-        url: '/auth/login',
+        url: '/auth/signin',
         method: 'POST',
         body: credentials,
       }),
     }),
     register: builder.mutation({
       query: userData => ({
-        url: '/auth/register',
+        url: '/auth/signup',
         method: 'POST',
         body: userData,
       }),
