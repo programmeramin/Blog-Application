@@ -8,6 +8,7 @@ import Blogs from "@/pages/blogs";
 import Contact from "@/pages/contact";
 import Home from "@/pages/home";
 import Profile from "@/pages/protected/profile";
+import VerifyEmailNotice from "@/pages/verifyEmailNotice";
 import { createBrowserRouter } from "react-router";
 
 export const router = createBrowserRouter([
@@ -15,26 +16,30 @@ export const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <Home />,
       },
       {
-        path: "/blogs",
+        path: '/blogs',
         element: <Blogs />,
       },
       {
-        path: "/about",
+        path: '/about',
         element: <About />,
       },
       {
-        path: "/contact",
+        path: '/contact',
         element: <Contact />,
+      },
+      {
+        path: '/verify-email-notice',
+        element: <VerifyEmailNotice />,
       },
       {
         element: <ProtectedLayout />,
         children: [
           {
-            path: "/profile",
+            path: '/profile',
             element: <Profile />,
           },
         ],
@@ -43,11 +48,11 @@ export const router = createBrowserRouter([
         element: <AuthLayout />,
         children: [
           {
-            path: "/auth/login",
+            path: '/auth/login',
             element: <Login />,
           },
           {
-            path: "/auth/register",
+            path: '/auth/register',
             element: <Register />,
           },
         ],

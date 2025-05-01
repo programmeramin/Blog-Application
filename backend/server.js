@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors"
 import dotenv from "dotenv";
 import colors from "colors";
 import mongoDBConnect from "./config/MongoDB.js";
@@ -10,6 +11,8 @@ const PORT = process.env.PORT || 6060;
 
 // app config
 const app = express();
+
+app.use(cors());
 
 // middleware
 app.use(express.json());
