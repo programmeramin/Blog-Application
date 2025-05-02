@@ -1,15 +1,20 @@
-import Layout from "@/layouts";
-import AuthLayout from "@/layouts/auth-layout";
-import ProtectedLayout from "@/layouts/protected-layout";
-import About from "@/pages/about";
-import Login from "@/pages/auth/login";
-import Register from "@/pages/auth/register";
-import Blogs from "@/pages/blogs";
-import Contact from "@/pages/contact";
-import Home from "@/pages/home";
-import Profile from "@/pages/protected/profile";
-import VerifyEmailNotice from "@/pages/verifyEmailNotice";
-import { createBrowserRouter } from "react-router";
+import Layout from '@/layouts';
+import AuthLayout from '@/layouts/auth-layout';
+import ProtectedLayout from '@/layouts/protected-layout';
+import About from '@/pages/about';
+import Login from '@/pages/auth/login';
+import Register from '@/pages/auth/register';
+import Blogs from '@/pages/blogs';
+import Contact from '@/pages/contact';
+import Home from '@/pages/home';
+import AdminRoute from '@/components/adminRoute';
+import PrivateRoute from '@/components/privateRoute';
+import Profile from '@/pages/protected/profile';
+import VerifyEmailNotice from '@/pages/verifyEmailNotice';
+import Dashboard from '@/pages/protected/dashboard';
+import ManageUsers from '@/pages/protected/admin/manage-users';
+import ManagePosts from '@/pages/protected/admin/manage-posts';
+import { createBrowserRouter } from 'react-router';
 
 export const router = createBrowserRouter([
   {
@@ -36,15 +41,6 @@ export const router = createBrowserRouter([
         element: <VerifyEmailNotice />,
       },
       {
-        element: <ProtectedLayout />,
-        children: [
-          {
-            path: '/profile',
-            element: <Profile />,
-          },
-        ],
-      },
-      {
         element: <AuthLayout />,
         children: [
           {
@@ -54,6 +50,37 @@ export const router = createBrowserRouter([
           {
             path: '/auth/register',
             element: <Register />,
+          },
+        ],
+      },
+      {
+        element: (
+          <PrivateRoute>
+            <ProtectedLayout />
+          </PrivateRoute>
+        ),
+        children: [
+          {
+            path: '/profile',
+            element: <Profile />,
+          },
+          {
+            path: '/dashboard',
+            element: <Dashboard />,
+          },
+          {
+            // Admin-only routes nested inside protected routes
+            element: <AdminRoute />,
+            children: [
+              {
+                path: '/admin/manage-users',
+                element: <ManageUsers />,
+              },
+              {
+                path: '/admin/manage-posts',
+                element: <ManagePosts />,
+              },
+            ],
           },
         ],
       },
