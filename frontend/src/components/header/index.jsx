@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils';
 import { UserButton } from '../user-button';
 
 const Header = () => {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   const { pathname } = useLocation();
   const isAuthPage = pathname.includes('auth');
   return (
@@ -26,7 +26,7 @@ const Header = () => {
           {!isAuthPage && <SearchInput />}
           <NavLinks />
           {isLoggedIn ? (
-            <Link to="/blogs/new" className={buttonVariants()}>
+            <Link to="/create-post" className={buttonVariants()}>
               Write <Edit className="size-4" />{' '}
             </Link>
           ) : (
