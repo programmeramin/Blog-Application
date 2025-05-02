@@ -1,12 +1,13 @@
-import React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils'
+import React from 'react'
 
-export const Container = ({ className, children }) => {
+const Container = ({children, className, elem = "div", ...props}) => {
+    const Elem = elem || "div"
   return (
-    <div
-      className={cn('mx-auto max-w-screen-xl px-4 xs:px-6 sm:px-8', className)}
-    >
+    <Elem className={cn('max-w-[1280px] w-full mx-auto px-3 sm:px-5 lg:px-6', className)} {...props}>
       {children}
-    </div>
-  );
-};
+    </Elem>
+  )
+}
+
+export default Container

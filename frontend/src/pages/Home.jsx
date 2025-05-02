@@ -1,9 +1,11 @@
-function Home() {
+import React from 'react'
+
+const Home = () => {
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Welcome to the Blog!</h2>
-      <p>Posts will appear here.</p>
+      Home Page
     </div>
-  );
+  )
 }
-export default Home;
+
+export default Home
