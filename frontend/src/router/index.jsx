@@ -15,6 +15,7 @@ import Dashboard from '@/pages/protected/dashboard';
 import ManageUsers from '@/pages/protected/admin/manage-users';
 import ManagePosts from '@/pages/protected/admin/manage-posts';
 import { createBrowserRouter } from 'react-router';
+import CreatePost from '@/pages/createPost';
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
       {
         path: '/verify-email-notice',
         element: <VerifyEmailNotice />,
+      },
+      {
+        path: '/create-post',
+        element: <CreatePost />,
       },
       {
         element: <AuthLayout />,
@@ -68,6 +73,7 @@ export const router = createBrowserRouter([
             path: '/dashboard',
             element: <Dashboard />,
           },
+
           {
             // Admin-only routes nested inside protected routes
             element: <AdminRoute />,

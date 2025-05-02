@@ -1,5 +1,4 @@
 import Container from '@/components/Container';
-import { Facebook, Twitter, Instagram, Linkedin, Mail } from 'lucide-react';
 import { Link } from 'react-router';
 import SocialIcons from './ui/socialIcons';
 
@@ -20,9 +19,10 @@ const Footer = () => {
               </Link>
             ))}
           </nav>
-
           {/* Social Icons */}
+          <div className="flex justify-center gap-3">
           <SocialIcons />
+          </div>
         </div>
 
         {/* Copyright and Tagline */}

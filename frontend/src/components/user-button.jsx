@@ -1,6 +1,6 @@
 import { mockUser, placeholderUserImage } from '@/constants';
 import { cn } from '@/lib/utils';
-import { LogOut, User2 } from 'lucide-react';
+import { LogOut, User2, LayoutDashboard } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { buttonVariants } from './ui/button';
@@ -15,6 +15,11 @@ export const UserButton = () => {
       label: 'Profile',
       icon: User2,
       onClick: () => navigate('/profile'),
+    },
+    {
+      label: 'Dashboard',
+      icon: LayoutDashboard,
+      onClick: () => navigate('/Dashboard'),
     },
     {
       label: 'Logout',
