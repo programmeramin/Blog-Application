@@ -16,6 +16,7 @@ import ManageUsers from '@/pages/protected/admin/manage-users';
 import ManagePosts from '@/pages/protected/admin/manage-posts';
 import { createBrowserRouter } from 'react-router';
 import CreatePost from '@/pages/createPost';
+import SinglePost from '@/pages/singlePost';
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: '/create-post',
         element: <CreatePost />,
+      },
+      {
+        path: '/test',
+        element: <SinglePost />,
       },
       {
         element: <AuthLayout />,
