@@ -1,5 +1,6 @@
 import FeaturePosts from '@/components/featurePosts';
 import MainCategories from '@/components/mainCatagories';
+import PostList from '@/components/postList';
 import React from 'react';
 import { Link } from 'react-router';
 
@@ -61,10 +62,14 @@ const Home = () => {
           </button>
         </Link> */}
       </div>
-      <MainCategories/> 
+      <MainCategories />
       {/* FEATURED POSTS */}
-      <FeaturePosts/>
+      <FeaturePosts />
       {/* POST LIST */}
+      <div>
+        <h1 className='my-8 text-2xl text-gray-600'></h1>
+        <PostList />
+      </div>
     </div>
   );
 };
