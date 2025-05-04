@@ -1,12 +1,14 @@
+import { BASE_URL } from '@/constants';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+
 // Replace with your backend API URL
-const BASE_URL = 'http://localhost:5050/api'; 
 
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
+    credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
       if (token) {
@@ -28,9 +30,10 @@ export const authApi = createApi({
         url: '/auth/signup',
         method: 'POST',
         body: userData,
+        credentials: 'include',
       }),
     }),
-    verifyEmail: builder.mutation({
+    verifyEmail: builder.query({
       query: verificationToken => ({
         url: `/auth/verify-email/${verificationToken}`,
         method: 'GET',
@@ -59,7 +62,7 @@ export const authApi = createApi({
 export const {
   useLoginMutation,
   useRegisterMutation,
-  useVerifyEmailMutation,
+  useLazyVerifyEmailQuery,
   useForgotPasswordMutation,
   useResetPasswordMutation,
   useGetMeQuery,

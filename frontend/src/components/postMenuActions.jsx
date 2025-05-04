@@ -1,6 +1,6 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDeletePostMutation } from '@/redux/api/postApi';
+import { useNavigate } from 'react-router';
+import { useDeletePostMutation } from '@/features/posts/postApi';
 
 const PostMenuActions = ({ postId }) => {
   const navigate = useNavigate();
