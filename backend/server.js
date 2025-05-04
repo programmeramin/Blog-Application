@@ -15,10 +15,12 @@ const app = express();
 
 app.use(cors());
 
+app.use(cookieParser());
+
 // middleware
 app.use(express.json());
-app.use(express.urlencoded({extended : false}));
-   
+app.use(express.urlencoded({ extended: false }));
+
 // server routes
 app.use("/api/auth", authRoute);
 app.use("/api/blog", postRoute);
