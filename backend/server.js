@@ -1,9 +1,10 @@
-import express from "express";
-import cors from "cors"
-import dotenv from "dotenv";
-import colors from "colors";
-import mongoDBConnect from "./config/MongoDB.js";
-import authRoute from "./routes/authRoute.js";
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import colors from 'colors';
+import mongoDBConnect from './config/MongoDB.js';
+import authRoute from './routes/authRoute.js';
+import cookieParser from 'cookie-parser';
 
 // dotenv config
 dotenv.config();
@@ -14,15 +15,17 @@ const app = express();
 
 app.use(cors());
 
+app.use(cookieParser());
+
 // middleware
 app.use(express.json());
-app.use(express.urlencoded({extended : false}));
-   
+app.use(express.urlencoded({ extended: false }));
+
 // server routes
-app.use("/api/auth", authRoute);
-     
+app.use('/api/auth', authRoute);
+
 // lisetening server
-app.listen(PORT,() =>{
-    console.log(`Server is running on port ${PORT}`.bgBlue.white)
-    mongoDBConnect()
-});        
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`.bgBlue.white);
+  mongoDBConnect();
+});
