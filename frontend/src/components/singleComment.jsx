@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDeleteCommentMutation } from '@/redux/api/commentApi';
+import { useDeleteCommentMutation } from '@/features/comments/commentApi';
 
 const SingleComment = ({ comment }) => {
   const [deleteComment] = useDeleteCommentMutation();

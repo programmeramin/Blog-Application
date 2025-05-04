@@ -1,16 +1,16 @@
 import React from 'react';
 import { useParams, Link } from 'react-router'; // useParams to get :postId from route
 import {
-  useGetPostQuery,
   useLikePostMutation,
   useDislikePostMutation,
-} from '@/redux/api/postApi';
+  useGetPostByIdQuery,
+} from '@/features/posts/postApi'; // Assuming you have a postApi file for API calls
 import Comments from '@/components/comments';
 import PostMenuActions from '@/components/postMenuActions';
 
 const SinglePost = () => {
   const { postId } = useParams(); // dynamic route like /posts/:postId
-  const { data: post, isLoading, isError } = useGetPostQuery(postId);
+  const { data: post, isLoading, isError } = useGetPostByIdQuery(postId);
   const [likePost] = useLikePostMutation();
   const [dislikePost] = useDislikePostMutation();
 

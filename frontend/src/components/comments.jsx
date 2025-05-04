@@ -3,7 +3,7 @@ import SingleComment from './singleComment';
 import {
   useAddCommentMutation,
   useGetCommentsQuery,
-} from '@/redux/api/commentApi';
+} from '@/features/comments/commentApi';
 
 const Comments = ({ postId }) => {
   const [text, setText] = useState('');

@@ -32,6 +32,8 @@ export const navLinks = [
   },
 ];
 
+export const BASE_URL = 'http://localhost:5050/api';
+
 export const placeholderUserImage = "/placeholder-user.webp";
 
 export const headerHeight = 70;
