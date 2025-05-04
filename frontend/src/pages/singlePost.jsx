@@ -1,78 +1,105 @@
+import React from 'react';
+import { useParams, Link } from 'react-router'; // useParams to get :postId from route
+import {
+  useGetPostQuery,
+  useLikePostMutation,
+  useDislikePostMutation,
+} from '@/redux/api/postApi';
 import Comments from '@/components/comments';
 import PostMenuActions from '@/components/postMenuActions';
-import { Link } from 'react-router';
-import React from 'react';
 
 const SinglePost = () => {
+  const { postId } = useParams(); // dynamic route like /posts/:postId
+  const { data: post, isLoading, isError } = useGetPostQuery(postId);
+  const [likePost] = useLikePostMutation();
+  const [dislikePost] = useDislikePostMutation();
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError || !post) return <p>Post not found.</p>;
+
+  const handleLike = () => {
+    likePost(postId);
+  };
+
+  const handleDislike = () => {
+    dislikePost(postId);
+  };
+
   return (
     <div className="flex flex-col gap-8">
-      {/* detail */}
+      {/* Post detail */}
       <div className="flex gap-8">
         <div className="lg:w-3/5 flex flex-col gap-8">
           <h1 className="text-xl md:text-3xl xl:text-4xl 2xl:text-5xl font-semibold">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic a
-            necessitatibus
+            {post?.title}
           </h1>
           <div className="flex items-center gap-2 text-gray-400 text-sm">
             <span>Written by</span>
-            <Link className="text-blue-800">John doe</Link>
+            <Link className="text-blue-800">{post?.author?.name}</Link>
             <span>on</span>
-            <Link className="text-blue-800">Web Design</Link>
-            <span>2 days ago</span>
+            <Link className="text-blue-800">{post?.category}</Link>
+            <span>{new Date(post?.createdAt).toDateString()}</span>
           </div>
-          <p className="text-gray-500 font-medium">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
-            reprehenderit ut eius rem fuga modi possimus, commodi, laborum
-            quidem officia sed nesciunt voluptatibus sequi dolores?
-          </p>
+          <p className="text-gray-500 font-medium">{post?.description}</p>
         </div>
         <div className="hidden lg:block w-2/5">
           <img
-            src="../assets/featured1.jpg"
+            src={post?.image || '../assets/featured1.jpg'}
             className="rounded-2xl"
-            alt="Feature 1"
+            alt={post?.title}
           />
         </div>
       </div>
-      {/* content */}
+
+      {/* Post content + sidebar */}
       <div className="flex flex-col md:flex-row gap-12 justify-between">
-        {/* text */}
         <div className="lg:text-lg flex flex-col gap-6 text-justify">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
-          laboriosam minima officiis error magnam veniam sunt, neque, obcaecati
-          nostrum adipisci officia ab tempore architecto iste, fugiat quas ipsam
-          beatae! Laboriosam nihil expedita minima repudiandae temporibus quia,
-          repellat quasi sequi esse, odit eos commodi quod nobis optio! Culpa
-          reiciendis sequi tempore!
+          {post?.content}
         </div>
-        {/* menu */}
+
+        {/* Side menu */}
         <div className="px-4 h-max sticky top-8">
           <h1 className="mb-4 text-sm font-medium">Author</h1>
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-8">
               <img
-                src="../assets/featured1.jpg"
+                src={post?.author?.avatar || '../assets/featured1.jpg'}
                 className="rounded-2xl"
-                alt="Feature 1"
+                alt={post?.author?.name}
               />
-              <Link className="text-blue-800">John doe</Link>
+              <Link className="text-blue-800">{post?.author?.name}</Link>
             </div>
             <p className="text-sm text-gray-500">
-              Lorem ipsum dolor sit amet consectetur
+              {post?.author?.bio || 'No bio available'}
             </p>
             <div className="flex gap-2">
-              <Link>
-                FB img
-              </Link>
-              <Link>
-                IG img
-              </Link>
+              <Link>FB</Link>
+              <Link>IG</Link>
             </div>
           </div>
-          <PostMenuActions />
+
+          {/* Like/Dislike Buttons */}
+          <div className="mt-8 flex gap-4">
+            <button
+              onClick={handleLike}
+              className="px-4 py-2 bg-green-600 text-white rounded-xl"
+            >
+              👍 {post?.likes?.length || 0}
+            </button>
+            <button
+              onClick={handleDislike}
+              className="px-4 py-2 bg-red-600 text-white rounded-xl"
+            >
+              👎 {post?.dislikes?.length || 0}
+            </button>
+          </div>
+
+          <PostMenuActions postId={postId} />
         </div>
       </div>
-      <Comments />
+
+      {/* Comments */}
+      <Comments postId={postId} />
     </div>
   );
 };
