@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { useRegisterMutation } from '@/features/auth/authApi';
 import { Button } from '@/components/ui/Button';
 import Input from '@/components/ui/input';
+import { toast } from 'react-toastify';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -70,6 +71,9 @@ const Register = () => {
       }).unwrap();
 
       navigate('/verify-email-notice');
+      toast.success(
+        'Registration successful! Please check your email to verify your account.'
+      );
     } catch (err) {
       if (err.data?.errors) {
         setErrors(err.data.errors);

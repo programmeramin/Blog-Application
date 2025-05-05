@@ -17,6 +17,7 @@ import ManagePosts from '@/pages/protected/admin/manage-posts';
 import { createBrowserRouter } from 'react-router';
 import CreatePost from '@/pages/createPost';
 import SinglePost from '@/pages/singlePost';
+import VerifyEmail from '@/components/verifyEmail';
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path: '/verify-email-notice',
         element: <VerifyEmailNotice />,
+      },
+      {
+        path: '/verify-email',
+        element: <VerifyEmail />,
       },
       {
         path: '/create-post',
