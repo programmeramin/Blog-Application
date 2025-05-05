@@ -1,9 +1,6 @@
 import { BASE_URL } from '@/constants';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-
-// Replace with your backend API URL
-
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
@@ -34,11 +31,9 @@ export const authApi = createApi({
       }),
     }),
     verifyEmail: builder.query({
-      query: verificationToken => ({
-        url: `/auth/verify-email/${verificationToken}`,
-        method: 'GET',
-      }),
+      query: token => `/auth/verify-email?token=${token}`,
     }),
+
     forgotPassword: builder.mutation({
       query: email => ({
         url: '/auth/forgot-password',

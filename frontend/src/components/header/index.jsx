@@ -10,8 +10,12 @@ import MobileSidebar from './mobile-sidebar';
 import { Link, useLocation } from 'react-router';
 import { cn } from '@/lib/utils';
 import { UserButton } from '../user-button';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+  const { user } = useSelector(state => state.auth);
+  console.log(user);
+
   const isLoggedIn = false;
   const { pathname } = useLocation();
   const isAuthPage = pathname.includes('auth');

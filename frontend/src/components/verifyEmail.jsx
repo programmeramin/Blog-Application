@@ -1,24 +1,23 @@
 import { useLazyVerifyEmailQuery } from '@/features/auth/authApi';
 import { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router';
+import { useNavigate, useSearchParams } from 'react-router';
 import { toast } from 'react-toastify';
 
 const VerifyEmail = () => {
   const navigate = useNavigate();
-  const { search } = useLocation();
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get('token');
   const [triggerVerify, { isSuccess, isError, error }] =
     useLazyVerifyEmailQuery();
-
-  const params = new URLSearchParams(search);
-  const token = params.get('token');
 
   useEffect(() => {
     if (token) {
       triggerVerify(token);
     } else {
       toast.error('Missing token in URL');
+      navigate('/auth/login');
     }
-  }, [token, triggerVerify]);
+  }, [token, triggerVerify, navigate]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -26,7 +25,9 @@ const VerifyEmail = () => {
       navigate('/auth/login');
     }
     if (isError) {
-      toast.error(error?.data?.message || 'Something went wrong.');
+      const errMsg = error?.data?.message || 'Verification failed';
+      toast.error(errMsg);
+      navigate('/auth/login');
     }
   }, [isSuccess, isError, error, navigate]);
 

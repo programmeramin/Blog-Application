@@ -1,9 +1,10 @@
+import { BASE_URL } from '@/constants';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const postApi = createApi({
   reducerPath: 'postApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://your-backend-url.com/api', // 🔁 Update this to your real backend
+    baseUrl: BASE_URL, // 🔁 Update this to your real backend
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token; // ⬅️ Optional: if using JWT
       if (token) {
