@@ -1,8 +1,13 @@
 import React from 'react';
 import { useDeleteCommentMutation } from '@/features/comments/commentApi';
+import { useSelector } from 'react-redux';
 
 const SingleComment = ({ comment }) => {
   const [deleteComment] = useDeleteCommentMutation();
+
+  const user = useSelector(state => state.auth.user);
+  const isOwnerOrAdmin =
+    user && (user._id === comment?.author?._id || user.role === 'admin');
 
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this comment?')) {
@@ -31,12 +36,14 @@ const SingleComment = ({ comment }) => {
       </div>
       <div className="mt-4 flex justify-between items-start">
         <p className="text-gray-700">{comment?.text}</p>
-        <button
-          onClick={handleDelete}
-          className="text-red-500 text-sm hover:underline"
-        >
-          Delete
-        </button>
+        {isOwnerOrAdmin && (
+          <button
+            onClick={handleDelete}
+            className="text-red-500 text-sm hover:underline"
+          >
+            Delete
+          </button>
+        )}
       </div>
     </div>
   );

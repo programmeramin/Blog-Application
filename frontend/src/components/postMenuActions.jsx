@@ -31,8 +31,10 @@ const PostMenuActions = ({ postId }) => {
 
       {/* Delete Button */}
       <div
-        onClick={handleDelete}
-        className="flex items-center gap-2 py-2 text-sm cursor-pointer text-red-500 hover:text-red-700"
+        onClick={isLoading ? null : handleDelete}
+        className={`flex items-center gap-2 py-2 text-sm cursor-pointer ${
+          isLoading ? 'text-gray-400' : 'text-red-500 hover:text-red-700'
+        }`}
       >
         🗑️ <span>{isLoading ? 'Deleting...' : 'Delete this Post'}</span>
       </div>

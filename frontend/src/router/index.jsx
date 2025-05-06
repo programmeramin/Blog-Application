@@ -18,6 +18,8 @@ import { createBrowserRouter } from 'react-router';
 import CreatePost from '@/pages/createPost';
 import SinglePost from '@/pages/singlePost';
 import VerifyEmail from '@/components/verifyEmail';
+import ForgotPassword from '@/pages/forgotPassword';
+import AllPosts from '@/pages/allPosts';
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +50,10 @@ export const router = createBrowserRouter([
         element: <VerifyEmail />,
       },
       {
+        path: '/forgot-password',
+        element: <ForgotPassword />,
+      },
+      {
         path: '/create-post',
         element: <CreatePost />,
       },
@@ -55,6 +61,11 @@ export const router = createBrowserRouter([
         path: '/test',
         element: <SinglePost />,
       },
+      {
+        path: '/blogs',
+        element: < AllPosts />,
+      },
+      
       {
         element: <AuthLayout />,
         children: [
