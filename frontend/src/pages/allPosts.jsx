@@ -2,7 +2,7 @@ import SideMenu from '@/components/sideMenu';
 import PostList from '@/components/postList';
 import { useState } from 'react';
 
-const PostListPage = () => {
+const AllPosts = () => {
   const [open, setOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
@@ -27,4 +27,4 @@ const PostListPage = () => {
   );
 };
 
-export default PostListPage;
+export default AllPosts;

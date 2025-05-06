@@ -1,18 +1,24 @@
 import React from 'react';
-import { useParams, Link } from 'react-router'; // useParams to get :postId from route
+import { useParams, Link } from 'react-router'; //
 import {
   useLikePostMutation,
   useDislikePostMutation,
   useGetPostByIdQuery,
-} from '@/features/posts/postApi'; // Assuming you have a postApi file for API calls
+} from '@/features/posts/postApi';
 import Comments from '@/components/comments';
 import PostMenuActions from '@/components/postMenuActions';
+import { useSelector } from 'react-redux';
 
 const SinglePost = () => {
   const { postId } = useParams(); // dynamic route like /posts/:postId
   const { data: post, isLoading, isError } = useGetPostByIdQuery(postId);
   const [likePost] = useLikePostMutation();
   const [dislikePost] = useDislikePostMutation();
+
+  const user = useSelector(state => state.auth.user);
+
+  const canManagePost =
+    user && (user._id === post?.author?._id || user.role === 'admin');
 
   if (isLoading) return <p>Loading...</p>;
   if (isError || !post) return <p>Post not found.</p>;
@@ -44,18 +50,19 @@ const SinglePost = () => {
         </div>
         <div className="hidden lg:block w-2/5">
           <img
-            src={post?.image || '../assets/featured1.jpg'}
-            className="rounded-2xl"
-            alt={post?.title}
+            src={post?.image || '/default-placeholder.png'}
+            alt={post?.title || 'Blog post image'}
+            className="rounded-2xl object-cover w-full h-auto"
           />
         </div>
       </div>
 
       {/* Post content + sidebar */}
       <div className="flex flex-col md:flex-row gap-12 justify-between">
-        <div className="lg:text-lg flex flex-col gap-6 text-justify">
-          {post?.content}
-        </div>
+        <div
+          className="lg:text-lg flex flex-col gap-6 text-justify"
+          dangerouslySetInnerHTML={{ __html: post?.content }}
+        />
 
         {/* Side menu */}
         <div className="px-4 h-max sticky top-8">
@@ -63,9 +70,9 @@ const SinglePost = () => {
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-8">
               <img
-                src={post?.author?.avatar || '../assets/featured1.jpg'}
-                className="rounded-2xl"
-                alt={post?.author?.name}
+                src={post?.author?.avatar || '/default-avatar.png'}
+                alt={post?.author?.name || 'Author'}
+                className="rounded-2xl w-16 h-16 object-cover"
               />
               <Link className="text-blue-800">{post?.author?.name}</Link>
             </div>
@@ -93,8 +100,8 @@ const SinglePost = () => {
               👎 {post?.dislikes?.length || 0}
             </button>
           </div>
-
-          <PostMenuActions postId={postId} />
+          {/* For Delete and Edit post */}
+          {canManagePost && <PostMenuActions postId={postId} />}
         </div>
       </div>
 
