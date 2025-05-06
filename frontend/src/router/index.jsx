@@ -18,6 +18,7 @@ import { createBrowserRouter } from 'react-router';
 import CreatePost from '@/pages/createPost';
 import SinglePost from '@/pages/singlePost';
 import VerifyEmail from '@/components/verifyEmail';
+import ForgotPassword from '@/pages/forgotPassword';
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path: '/verify-email',
         element: <VerifyEmail />,
+      },
+      {
+        path: '/forgot-password',
+        element: <ForgotPassword />,
       },
       {
         path: '/create-post',
