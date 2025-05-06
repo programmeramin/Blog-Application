@@ -38,7 +38,19 @@ export const signup = async (req, res, next) => {
   try {
     await newUser.save();
 
-    const verifyLink = `http://localhost:3000/verify-email?token=${verificationToken}`;
+    const jwtToken = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+      expiresIn: '1h',
+    });
+
+    // Set JWT in cookie
+    res.cookie('auth_token', jwtToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // Only true for production with HTTPS
+      sameSite: 'Strict',
+      expires: new Date(Date.now() + 3600000), // 1 hour expiration
+    });
+
+    const verifyLink = `http://localhost:5173/verify-email?token=${verificationToken}`;
 
     await sendEmail({
       to: email,
@@ -73,9 +85,11 @@ export const signin = async (req, res, next) => {
 
   try {
     const validUser = await User.findOne({ email });
+    console.log(validUser);
     if (!validUser) {
       return next(errorHandler(400, 'User not found'));
     }
+
 
     // Check if user has verified their email
     if (!validUser.isVerified) {
@@ -99,7 +113,7 @@ export const signin = async (req, res, next) => {
 
     const { password: pass, ...rest } = validUser._doc;
 
-    res.status(200).json({ rest });
+    res.status(200).json({ user: rest, message: "Login successful" });
   } catch (error) {
     next(error);
   }
@@ -128,7 +142,9 @@ export const verifyEmail = async (req, res, next) => {
     user.verificationToken = undefined;
     await user.save();
 
-    res.status(200).json({ message: 'Email verified successfully. You can now log in.' });
+    res
+      .status(200)
+      .json({ message: 'Email verified successfully. You can now log in.' });
   } catch (error) {
     next(error);
   }

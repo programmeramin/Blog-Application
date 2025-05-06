@@ -49,7 +49,6 @@ const Login = () => {
 
     try {
       const response = await login(formData).unwrap();
-
       dispatch(
         setCredentials({
           user: response.user,

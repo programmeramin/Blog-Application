@@ -14,9 +14,6 @@ import { useSelector } from 'react-redux';
 
 const Header = () => {
   const { user } = useSelector(state => state.auth);
-  console.log(user);
-
-  const isLoggedIn = false;
   const { pathname } = useLocation();
   const isAuthPage = pathname.includes('auth');
   return (
@@ -29,7 +26,7 @@ const Header = () => {
         <div className="flex gap-4 w-full justify-end items-center">
           {!isAuthPage && <SearchInput />}
           <NavLinks />
-          {isLoggedIn ? (
+          {user ? (
             <Link to="/create-post" className={buttonVariants()}>
               Write <Edit className="size-4" />{' '}
             </Link>
@@ -39,7 +36,7 @@ const Header = () => {
             </Link>
           )}
           <ThemeToggler className="hidden sm:flex" />
-          {isLoggedIn && <UserButton />}
+          {user && <UserButton />}
         </div>
       </Container>
     </header>
