@@ -149,3 +149,11 @@ export const verifyEmail = async (req, res, next) => {
     next(error);
   }
 };
+
+
+
+// logout
+export const logout = async (req, res) => {
+  res.clearCookie("access_token");
+  res.status(200).json({ message: "Logout successful" });
+};   
