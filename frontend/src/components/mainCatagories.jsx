@@ -25,10 +25,10 @@ const MainCategories = () => {
           Development
         </Link>
         <Link
-          to="/posts?cat=databases"
+          to="/posts?cat=database"
           className="hover:bg-blue-50 rounded-full px-4 py-2"
         >
-          Databases
+          Database
         </Link>
         <Link
           to="/posts?cat=seo"

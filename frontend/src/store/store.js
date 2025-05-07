@@ -3,8 +3,9 @@ import authReducer from '../features/auth/authSlice';
 import { authApi } from '../features/auth/authApi';
 import { postApi } from '@/features/posts/postApi';
 import { userApi } from '@/features/users/userApi';
+import { commentApi } from '@/features/comments/commentApi';
 
-const apiMiddlewares = [authApi.middleware, postApi.middleware, userApi.middleware];
+const apiMiddlewares = [authApi.middleware, postApi.middleware, userApi.middleware, commentApi.middleware];
 
 
 export const store = configureStore({
@@ -13,6 +14,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [postApi.reducerPath]: postApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [commentApi.reducerPath]: commentApi.reducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(...apiMiddlewares),

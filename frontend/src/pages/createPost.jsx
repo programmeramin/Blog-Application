@@ -5,12 +5,14 @@ import Input from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import 'react-quill-new/dist/quill.snow.css';
 import { useCreatePostMutation } from '@/features/posts/postApi';
+import { useSelector } from 'react-redux';
 
 const CreatePost = () => {
   const [title, setTitle] = useState('Write your Awesome Story here...');
   const [category, setCategory] = useState('General');
   const [content, setContent] = useState('');
   const [description, setDescription] = useState('A Short Description');
+  const user = useSelector(state => state.auth.user);
 
   const [createPost, { isLoading, isError }] = useCreatePostMutation();
 
@@ -22,6 +24,7 @@ const CreatePost = () => {
       category,
       description,
       content,
+      author: user?._id,
     };
 
     try {
@@ -100,10 +103,12 @@ const CreatePost = () => {
             onChange={e => setCategory(e.target.value)}
             className="block w-40 p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
-            <option value="General">General</option>
-            <option value="Technology">Technology</option>
-            <option value="Travel">Travel</option>
-            <option value="Lifestyle">Lifestyle</option>
+            <option value="/posts">General</option>
+            <option value="web-design">Web Design</option>
+            <option value="development">Development</option>
+            <option value="database">Database</option>
+            <option value="seo">SEO</option>
+            <option value="marketing">Marketing</option>
           </select>
         </div>
 

@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/signup', signup);
 router.post('/signin', signin);
 router.get('/verify-email', verifyEmail);
-router.post('/logut', logout);
+router.post('/logout', logout);
 
 // export router
 export default router;

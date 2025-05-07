@@ -1,5 +1,6 @@
 import Post from "../models/postModels.js";
 import errorHandler from "../middleware/errorHandler.js";
+import mongoose from "mongoose";
   
     
 // Create a new blog post
