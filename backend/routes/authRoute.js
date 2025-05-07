@@ -1,5 +1,5 @@
 import express from 'express';
-import { signin, signup, verifyEmail } from '../controller/authController.js';
+import { signin, signup, verifyEmail, logout } from '../controller/authController.js';
 
 // router config
 const router = express.Router();
@@ -8,6 +8,8 @@ const router = express.Router();
 router.post('/signup', signup);
 router.post('/signin', signin);
 router.get('/verify-email', verifyEmail);
+router.post('/logut', logout);
 
 // export router
 export default router;
+   
