@@ -58,14 +58,14 @@ export const router = createBrowserRouter([
         element: <CreatePost />,
       },
       {
-        path: '/test',
+        path: '/posts/:postId',
         element: <SinglePost />,
       },
       {
         path: '/blogs',
-        element: < AllPosts />,
+        element: <AllPosts />,
       },
-      
+
       {
         element: <AuthLayout />,
         children: [
