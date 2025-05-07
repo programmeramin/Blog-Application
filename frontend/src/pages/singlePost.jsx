@@ -10,7 +10,8 @@ import PostMenuActions from '@/components/postMenuActions';
 import { useSelector } from 'react-redux';
 
 const SinglePost = () => {
-  const { postId } = useParams(); // dynamic route like /posts/:postId
+  const { postId } = useParams();
+  console.log(postId)// dynamic route like /posts/:postId
   const { data: post, isLoading, isError } = useGetPostByIdQuery(postId);
   const [likePost] = useLikePostMutation();
   const [dislikePost] = useDislikePostMutation();
