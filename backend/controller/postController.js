@@ -5,7 +5,7 @@ import errorHandler from "../middleware/errorHandler.js";
 // Create a new blog post
 export const createBlog = async (req, res, next) => {
   try {
-    const { title, content } = req.body;
+    const { title, content, category, description } = req.body;
     const image = req.file ? req.file.path : '';
 
     const slug = title
@@ -14,7 +14,14 @@ export const createBlog = async (req, res, next) => {
     .toLowerCase()
     .replace(/[^a-zA-Z0-9-]/g, '');
 
-    const blog = new Post({ title, content, image, slug});
+    const blog = new Post({
+      title,
+      content,
+      image,
+      slug,
+      category,
+      description,
+    });
     await blog.save();
 
     res.status(201).json(blog);
