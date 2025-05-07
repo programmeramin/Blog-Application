@@ -5,13 +5,30 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { buttonVariants } from './ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { useLogoutMutation } from '@/features/auth/authApi';
+import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from '@/features/auth/authSlice';
 
 export const UserButton = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  const user = mockUser;
+  const [logout] = useLogoutMutation();
+  const user = useSelector(selectCurrentUser);
 
-  
+  const handleLogout = async () => {
+    try {
+      await logout().unwrap(); // Trigger the mutation
+      // The Redux store will be automatically updated via your auth slice
+      navigate('/');
+      window.location.reload(); 
+      toast.success('Logged out successfully');
+    } catch (error) {
+      console.error('Logout failed:', error);
+      toast.error('Logout failed. Please try again.');
+    }
+  };
+
   const dropdownItems = [
     {
       label: 'Profile',
@@ -26,7 +43,7 @@ export const UserButton = () => {
     {
       label: 'Logout',
       icon: LogOut,
-      onClick: () => {},
+      onClick: handleLogout,
     },
   ];
 
