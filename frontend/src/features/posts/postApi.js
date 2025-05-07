@@ -16,18 +16,18 @@ export const postApi = createApi({
   tagTypes: ['Posts'],
   endpoints: builder => ({
     getAllPosts: builder.query({
-      query: () => '/posts',
+      query: () => '/blog/getAllPosts',
       providesTags: ['Posts'],
     }),
 
     getPostById: builder.query({
-      query: id => `/posts/${id}`,
+      query: id => `/blog/getSingleBlog/${id}`,
       providesTags: (result, error, id) => [{ type: 'Posts', id }],
     }),
 
     createPost: builder.mutation({
       query: newPost => ({
-        url: '/posts',
+        url: '/blog/create',
         method: 'POST',
         body: newPost,
       }),
@@ -36,7 +36,7 @@ export const postApi = createApi({
 
     updatePost: builder.mutation({
       query: ({ id, ...data }) => ({
-        url: `/posts/${id}`,
+        url: `/blog/update/${id}`,
         method: 'PUT',
         body: data,
       }),
@@ -45,7 +45,7 @@ export const postApi = createApi({
 
     deletePost: builder.mutation({
       query: id => ({
-        url: `/posts/${id}`,
+        url: `/blog/delete/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: (result, error, id) => [{ type: 'Posts', id }],

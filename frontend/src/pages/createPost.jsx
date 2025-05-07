@@ -4,6 +4,7 @@ import ReactQuill from 'react-quill-new';
 import Input from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import 'react-quill-new/dist/quill.snow.css';
+import { useCreatePostMutation } from '@/features/posts/postApi';
 
 const CreatePost = () => {
   const [title, setTitle] = useState('Write your Awesome Story here...');
@@ -11,16 +12,31 @@ const CreatePost = () => {
   const [content, setContent] = useState('');
   const [description, setDescription] = useState('A Short Description');
 
-  const handleSubmit = e => {
+  const [createPost, { isLoading, isError }] = useCreatePostMutation();
+
+  const handleSubmit = async e => {
     e.preventDefault();
+
     const postData = {
       title,
       category,
       description,
       content,
     };
-    console.log('Post data to submit:', postData);
-    // Later: dispatch(createPost(postData)) using RTK Query or thunk
+
+    try {
+      const res = await createPost(postData).unwrap();
+      console.log('✅ Post created:', res);
+
+      // Optionally reset form or redirect:
+      setTitle('');
+      setCategory('General');
+      setDescription('');
+      setContent('');
+      // navigate('/posts'); // if using react-router
+    } catch (err) {
+      console.error('❌ Failed to create post:', err);
+    }
   };
 
   // ReactQuill toolbar
@@ -48,8 +64,6 @@ const CreatePost = () => {
     'link',
     'image',
   ];
-
-
 
   return (
     <div className="max-w-4xl mx-auto p-4">
@@ -115,9 +129,13 @@ const CreatePost = () => {
             placeholder="Write your post content here..."
           />
         </div>
-
-        <Button type="submit" className="sm:w-auto mt-10">
-          Publish Post
+        {isError && (
+          <div className="text-red-500 mt-2">
+            ❌ Something went wrong while creating the post. Please try again.
+          </div>
+        )}
+        <Button type="submit" className="sm:w-auto mt-10" disabled={isLoading}>
+          {isLoading ? 'Publishing...' : 'Publish Post'}
         </Button>
       </form>
     </div>
