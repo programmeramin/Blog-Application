@@ -5,8 +5,7 @@ import mongoose from 'mongoose';
 // Create a new blog post
 export const createBlog = async (req, res, next) => {
   try {
-    const { title, content, category, description } = req.body;
-    const image = req.file ? req.file.path : '';
+    const { title, content, category, description, image } = req.body;
     const userId = req.user.id;
     const slug = title
       .split(' ')

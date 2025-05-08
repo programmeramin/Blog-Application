@@ -6,13 +6,18 @@ import { Button } from '@/components/ui/Button';
 import 'react-quill-new/dist/quill.snow.css';
 import { useCreatePostMutation } from '@/features/posts/postApi';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { uploadToCloudinary } from '@/lib/uploadToCloudinary';
 
 const CreatePost = () => {
-  const [title, setTitle] = useState('Write your Awesome Story here...');
+  const [title, setTitle] = useState('');
   const [category, setCategory] = useState('General');
   const [content, setContent] = useState('');
-  const [description, setDescription] = useState('A Short Description');
+  const [coverImage, setCoverImage] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [description, setDescription] = useState('');
   const user = useSelector(state => state.auth.user);
+  const navigate = useNavigate();
 
   const [createPost, { isLoading, isError }] = useCreatePostMutation();
 
@@ -25,6 +30,7 @@ const CreatePost = () => {
       description,
       content,
       author: user?._id,
+      image: coverImage,
     };
 
     try {
@@ -36,10 +42,21 @@ const CreatePost = () => {
       setCategory('General');
       setDescription('');
       setContent('');
-      // navigate('/posts'); // if using react-router
+      setCoverImage(null);
+      navigate('/'); // if using react-router
     } catch (err) {
       console.error('❌ Failed to create post:', err);
     }
+  };
+
+  const handleImageChange = async e => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+    const url = await uploadToCloudinary(file);
+    setCoverImage(url);
+    setUploading(false);
   };
 
   // ReactQuill toolbar
@@ -76,11 +93,33 @@ const CreatePost = () => {
         {/* Cover Image */}
         <div className="space-y-2">
           <label className="block text-sm font-medium">Add a cover image</label>
-          <div className="flex items-center justify-center w-full h-40 border-2 border-dashed rounded-lg bg-gray-50">
-            <span className="text-gray-500">
-              Click to upload or drag and drop
-            </span>
-          </div>
+
+          {/* Hidden file input */}
+          <input
+            type="file"
+            id="cover-upload"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="hidden"
+          />
+
+          {/* Custom button */}
+          <label
+            htmlFor="cover-upload"
+            className="inline-block px-4 py-2 bg-blue-600 text-white rounded-md cursor-pointer hover:bg-blue-700 transition"
+          >
+            {coverImage ? 'Change Image' : 'Upload Cover Image'}
+          </label>
+
+          {uploading && <p className="text-sm text-blue-500">Uploading...</p>}
+
+          {coverImage && (
+            <img
+              src={coverImage}
+              alt="Cover"
+              className="mt-2 w-full h-78 object-cover rounded-md shadow"
+            />
+          )}
         </div>
 
         {/* Title */}
@@ -89,7 +128,8 @@ const CreatePost = () => {
             type="text"
             value={title}
             onChange={e => setTitle(e.target.value)}
-            className="text-3xl font-bold border-none focus:ring-0 px-0 w-full"
+            placeholder="Enter post title"
+            className="text-3xl font-bold border-2  focus:ring-0 p-2 w-full"
           />
         </div>
 
