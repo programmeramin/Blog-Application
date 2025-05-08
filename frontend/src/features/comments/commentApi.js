@@ -16,23 +16,37 @@ export const commentApi = createApi({
   }),
   tagTypes: ['Comments'],
   endpoints: builder => ({
+    // POST /api/comments
     addComment: builder.mutation({
-      query: data => ({
+      query: ({ postId, text }) => ({
         url: '/comments',
         method: 'POST',
-        body: data,
+        body: { postId, text }, // matches backend addComment controller
       }),
-      invalidatesTags: ['Comments'],
+      invalidatesTags: (_result, _error, { postId }) => [
+        { type: 'Comments', id: postId },
+      ],
     }),
+
+    // GET /api/comments/:postId
     getComments: builder.query({
       query: postId => `/comments/${postId}`,
-      providesTags: ['Comments'],
+      providesTags: (result, _error, postId) =>
+        result
+          ? [
+              { type: 'Comments', id: postId },
+              ...result.map(({ _id }) => ({ type: 'Comments', id: _id })),
+            ]
+          : [{ type: 'Comments', id: postId }],
     }),
+
+    // DELETE /api/comments/:id
     deleteComment: builder.mutation({
       query: commentId => ({
         url: `/comments/${commentId}`,
         method: 'DELETE',
       }),
+      // No postId available here unless you pass it, so just broadly invalidate
       invalidatesTags: ['Comments'],
     }),
   }),
