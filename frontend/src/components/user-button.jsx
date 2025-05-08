@@ -1,4 +1,4 @@
-import { mockUser, placeholderUserImage } from '@/constants';
+import { placeholderUserImage } from '@/constants';
 import { cn } from '@/lib/utils';
 import { LogOut, User2, LayoutDashboard } from 'lucide-react';
 import { useState } from 'react';

@@ -11,13 +11,13 @@ import { useSelector } from 'react-redux';
 
 const SinglePost = () => {
   const { postId } = useParams();
-  console.log(postId)// dynamic route like /posts/:postId
+  console.log(postId); // dynamic route like /posts/:postId
   const { data: post, isLoading, isError } = useGetPostByIdQuery(postId);
   const [likePost] = useLikePostMutation();
   const [dislikePost] = useDislikePostMutation();
 
   const user = useSelector(state => state.auth.user);
-  console.log(post)
+  console.log(post);
 
   const canManagePost =
     user && (user._id === post?.author?._id || user.role === 'admin');
@@ -62,25 +62,22 @@ const SinglePost = () => {
       {/* Post content + sidebar */}
       <div className="flex flex-col md:flex-row gap-12 justify-between">
         <div
-          className="lg:text-lg flex flex-col gap-6 text-justify"
+          className="lg:text-lg flex flex-col text-justify"
           dangerouslySetInnerHTML={{ __html: post?.content }}
         />
 
         {/* Side menu */}
-        <div className="px-4 h-max sticky top-8">
-          <h1 className="mb-4 text-sm font-medium">Author</h1>
+        <div className="px-4 h-max sticky top-25">
+          <h1 className="mb-4 text-sm font-medium">{post?.author?.username}</h1>
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-8">
               <img
                 src={post?.author?.avatar || '/default-avatar.png'}
-                alt={post?.author?.name || 'Author'}
+                alt={post?.author?.username || 'Author'}
                 className="rounded-2xl w-16 h-16 object-cover"
               />
-              <Link className="text-blue-800">{post?.author?.name}</Link>
+              <Link className="text-blue-800">{post?.author?.usernam}</Link>
             </div>
-            <p className="text-sm text-gray-500">
-              {post?.author?.bio || 'No bio available'}
-            </p>
             <div className="flex gap-2">
               <Link>FB</Link>
               <Link>IG</Link>
