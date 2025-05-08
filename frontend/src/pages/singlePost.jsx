@@ -17,6 +17,7 @@ const SinglePost = () => {
   const [dislikePost] = useDislikePostMutation();
 
   const user = useSelector(state => state.auth.user);
+  console.log(post)
 
   const canManagePost =
     user && (user._id === post?.author?._id || user.role === 'admin');
@@ -42,7 +43,7 @@ const SinglePost = () => {
           </h1>
           <div className="flex items-center gap-2 text-gray-400 text-sm">
             <span>Written by</span>
-            <Link className="text-blue-800">{post?.author?.name}</Link>
+            <Link className="text-blue-800">{post?.author?.username}</Link>
             <span>on</span>
             <Link className="text-blue-800">{post?.category}</Link>
             <span>{new Date(post?.createdAt).toDateString()}</span>

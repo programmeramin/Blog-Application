@@ -4,7 +4,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const postApi = createApi({
   reducerPath: 'postApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: BASE_URL, // 🔁 Update this to your real backend
+    baseUrl: BASE_URL,
+    credentials: 'include', // 🔁 Update this to your real backend
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token; // ⬅️ Optional: if using JWT
       if (token) {
