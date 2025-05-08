@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema(
   {
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     content: {
       type: String,
       required: true,
@@ -9,16 +14,20 @@ const postSchema = new mongoose.Schema(
     title: {
       type: String,
       required: true,
-      unique: true,
     },
     image: {
       type: String,
-      default:
-        'https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2021/09/how-to-write-a-blog-post.png',
     },
     description: {
       type: String,
-      default: '',
+    },
+    isFeatured: {
+      type: Boolean,
+      default: false,
+    },
+    visits: {
+      type: Number,
+      default: 0,
     },
     category: {
       type: String,
