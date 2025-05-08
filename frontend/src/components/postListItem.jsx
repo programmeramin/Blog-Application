@@ -30,7 +30,7 @@ const PostListItem = ({ post }) => {
             to={`/authors/${post.author?._id || ''}`}
             className="text-blue-800 hover:underline"
           >
-            {post.author?.name || 'Unknown'}
+            {post.author?.username || 'Unknown'}
           </Link>
           <span>in</span>
           <Link
