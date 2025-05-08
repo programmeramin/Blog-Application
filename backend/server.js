@@ -10,7 +10,7 @@ import userRoutes from './routes/userRoute.js'
 // dotenv config
 dotenv.config();
 const PORT = process.env.PORT || 6060;
-
+         
 // app config
 const app = express();
 
@@ -36,4 +36,4 @@ app.use('/api/blog', postRoute);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   mongoDBConnect();
-});
+});   

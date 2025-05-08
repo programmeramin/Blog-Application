@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/userModels.js';
 import crypto from 'crypto';
 import { sendEmail } from '../utils/sendEmail.js';
+import { fileUploadToCloud } from '../utils/CloudInary.js';
 
 /**
  * @description User Registration
@@ -148,6 +149,36 @@ export const verifyEmail = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+
+/**
+ * @description profile photo change
+ * @method POST
+ * @route /api/v1/auth/profile-photo-update
+ * @access private
+ */
+
+export const profilePhotoUpdate = async(req, res) =>{
+
+    const {email} = req.body;
+    
+  //console.log(req.file);
+ const fileData =  await fileUploadToCloud(req.file.path);
+
+ // console.log(req.cookies.accessToken);
+  const data  = jwt.verify(req.cookies.access_token, process.env.JWT_SECRET);
+
+ const profileData = await User.findOne({email}); 
+ console.log(profileData);
+ 
+
+//  console.log(profileData); 
+  profileData.profilePicture  =  fileData.secure_url;
+  profileData.save();
+
+ res.status(200).json({user : profileData, message : "Profile photo updated success"});
+
 };
 
 
