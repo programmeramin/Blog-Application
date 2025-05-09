@@ -2,8 +2,12 @@ import React from 'react';
 import PostListItem from './postListItem';
 import { useGetAllPostsQuery } from '@/features/posts/postApi';
 
-const PostList = ({ category }) => {
-  const { data: posts, isLoading, error } = useGetAllPostsQuery();
+const PostList = ({ category, sort }) => {
+  const {
+    data: posts,
+    isLoading,
+    error,
+  } = useGetAllPostsQuery({ cat: category, sort });
 
   if (isLoading) return <p className="text-center">Loading posts...</p>;
   if (error)

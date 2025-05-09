@@ -17,7 +17,19 @@ export const postApi = createApi({
   tagTypes: ['Posts'],
   endpoints: builder => ({
     getAllPosts: builder.query({
-      query: () => '/blog/getAllPosts',
+      query: ({ cat, sort }) => {
+        let url = '/blog/getAllPosts';
+        const params = new URLSearchParams();
+
+        if (cat) params.append('cat', cat);
+        if (sort) params.append('sort', sort);
+
+        if (params.toString()) {
+          url += `?${params.toString()}`;
+        }
+
+        return url;
+      },
       providesTags: ['Posts'],
     }),
 

@@ -4,7 +4,6 @@ import ProtectedLayout from '@/layouts/protected-layout';
 import About from '@/pages/about';
 import Login from '@/pages/auth/login';
 import Register from '@/pages/auth/register';
-import Blogs from '@/pages/blogs';
 import Contact from '@/pages/contact';
 import Home from '@/pages/home';
 import AdminRoute from '@/components/adminRoute';
@@ -28,10 +27,6 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
-      },
-      {
-        path: '/blogs',
-        element: <Blogs />,
       },
       {
         path: '/about',
@@ -61,6 +56,7 @@ export const router = createBrowserRouter([
         path: '/posts/:postId',
         element: <SinglePost />,
       },
+
       {
         path: '/blogs',
         element: <AllPosts />,
