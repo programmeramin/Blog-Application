@@ -21,7 +21,6 @@ const Comments = ({ postId }) => {
       setText('');
     } catch (err) {
       console.error('Failed to send comment:', err);
-      alert('Something went wrong!');
     }
   };
 

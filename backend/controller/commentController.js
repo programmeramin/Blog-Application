@@ -1,4 +1,4 @@
-import Comment from '../models/commentModel.js';
+import Comment from '../models/commentModels.js';
 
 // POST /api/comments
 export const addComment = async (req, res) => {
@@ -16,7 +16,7 @@ export const addComment = async (req, res) => {
 
   res.status(201).json({
     ...populatedComment.toObject(),
-    author: populatedComment.user, // again, frontend expects "author"
+    author: populatedComment.user, 
   });
 };
 
@@ -42,7 +42,7 @@ export const deleteComment = async (req, res) => {
 
   // Check ownership
   if (
-    comment.user.toString() !== req.user._id.toString() &&
+    comment.user.toString() !== req.user.id.toString() &&
     req.user.role !== 'admin'
   ) {
     return res
