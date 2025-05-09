@@ -60,11 +60,11 @@ const Comments = ({ postId }) => {
         <p>Loading comments...</p>
       ) : isError ? (
         <p>Failed to load comments.</p>
-      ) : data?.length === 0 ? (
+      ) : !data || data.length === 0 ? (
         <p className="text-gray-500">No comments yet. Be the first one!</p>
       ) : (
         data.map(comment => (
-          <SingleComment key={comment._id} comment={comment} />
+          <SingleComment key={comment._id} comment={comment} postId={postId} />
         ))
       )}
     </div>

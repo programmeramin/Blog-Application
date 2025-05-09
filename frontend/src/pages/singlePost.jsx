@@ -8,6 +8,7 @@ import {
 import Comments from '@/components/comments';
 import PostMenuActions from '@/components/postMenuActions';
 import { useSelector } from 'react-redux';
+import { placeholderUserImage } from '@/constants';
 
 const SinglePost = () => {
   const { postId } = useParams();
@@ -72,7 +73,7 @@ const SinglePost = () => {
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-8">
               <img
-                src={post?.author?.avatar || '/default-avatar.png'}
+                src={post?.author?.image || placeholderUserImage}
                 alt={post?.author?.username || 'Author'}
                 className="rounded-2xl w-16 h-16 object-cover"
               />

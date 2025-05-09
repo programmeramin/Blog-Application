@@ -8,11 +8,11 @@ export const addComment = async (req, res) => {
 
   const comment = await Comment.create({
     description: text,
-    user: req.user._id,
+    user: req.user.id,
     post: postId,
   });
 
-  const populatedComment = await comment.populate('user', 'name avatar');
+  const populatedComment = await comment.populate('user', 'name image');
 
   res.status(201).json({
     ...populatedComment.toObject(),

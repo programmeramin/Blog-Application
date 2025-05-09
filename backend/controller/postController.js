@@ -92,3 +92,29 @@ export const deleteBlog = async (req, res, next) => {
     next(err);
   }
 };
+
+// Like a blog post
+export const likeBlog = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user.id;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: 'Invalid blog ID' });
+    }
+
+    const blog = await Post.findById(id);
+    if (!blog) return res.status(404).json({ error: 'Blog not found' });
+
+    if (blog.likes.includes(userId)) {
+      return res.status(400).json({ error: 'You already liked this blog' });
+    }
+
+    blog.likes.push(userId);
+    await blog.save();
+
+    res.json(blog);
+  } catch (err) {
+    next(err);
+  }
+};
