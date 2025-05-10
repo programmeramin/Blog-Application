@@ -11,24 +11,25 @@ const SideMenu = ({ onFilterChange }) => {
   };
 
   return (
-    <div className="px-4 h-max sticky top-25">
-      <h1 className="mt-8 mb-4 text-sm font-medium">Sort By</h1>
-      <div className="flex flex-col gap-2 text-sm">
+    <div className="bg-white rounded-2xl shadow-sm p-6 sticky top-[90px]">
+      <h2 className="font-semibold text-lg text-gray-900 mb-4">Sort By</h2>
+      <div className="flex flex-col gap-3 text-sm mb-6">
         {['newest', 'popular', 'trending', 'viewed'].map(sort => (
-          <label key={sort} className="flex items-center gap-2 cursor-pointer">
+          <label key={sort} className="flex items-center gap-3 cursor-pointer hover:text-blue-800 transition-colors">
             <input
               type="radio"
               name="sort"
               value={sort}
               onChange={handleSortChange}
+              className="text-blue-800 focus:ring-blue-800"
             />
             {sort[0].toUpperCase() + sort.slice(1)}
           </label>
         ))}
       </div>
 
-      <h1 className="mt-8 mb-4 text-sm font-medium">Categories</h1>
-      <div className="flex flex-col gap-2 text-sm">
+      <h2 className="font-semibold text-lg text-gray-900 mb-4">Categories</h2>
+      <div className="flex flex-col gap-3 text-sm">
         {[
           'all',
           'web-design',
@@ -40,9 +41,10 @@ const SideMenu = ({ onFilterChange }) => {
           <button
             key={cat}
             onClick={() => handleCategoryClick(cat === 'all' ? null : cat)}
-            className="underline text-left"
+            className="text-left hover:text-blue-800 transition-colors flex items-center gap-2"
           >
-            {cat === 'all' ? 'All' : cat.replace('-', ' ').toUpperCase()}
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-800"></span>
+            {cat === 'all' ? 'All' : cat.replace('-', ' ').charAt(0).toUpperCase() + cat.replace('-', ' ').slice(1)}
           </button>
         ))}
       </div>
