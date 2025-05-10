@@ -1,7 +1,6 @@
 import Layout from '@/layouts';
 import AuthLayout from '@/layouts/auth-layout';
 import ProtectedLayout from '@/layouts/protected-layout';
-import About from '@/pages/about';
 import Login from '@/pages/auth/login';
 import Register from '@/pages/auth/register';
 import Contact from '@/pages/contact';
@@ -19,6 +18,8 @@ import SinglePost from '@/pages/singlePost';
 import VerifyEmail from '@/components/verifyEmail';
 import ForgotPassword from '@/pages/forgotPassword';
 import AllPosts from '@/pages/allPosts';
+import About from '@/pages/about';
+
 
 export const router = createBrowserRouter([
   {

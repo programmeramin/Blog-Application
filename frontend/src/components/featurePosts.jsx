@@ -21,7 +21,7 @@ const FeaturePosts = () => {
         </div>
         {/* title */}
         <Link to="/test" className="text-xl lg:text-3xl font-semibold lg: ">
-          A Beginner's Guide to Learning JavaScript: Unveiling the Secrets of
+           A Beginner's Guide to Learning JavaScript: Unveiling the Secrets of
           the Web
         </Link>
       </div>
