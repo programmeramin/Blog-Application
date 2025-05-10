@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 
 import { Button } from '@/components/ui/Button';
 import Input from '@/components/ui/input';
-import { PasswordInput } from '@/components/password-input';
+import { PasswordInput } from '@/components/passwordInput';
 
 const Login = () => {
   const [formData, setFormData] = useState({

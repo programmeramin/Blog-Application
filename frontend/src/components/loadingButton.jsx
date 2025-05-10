@@ -11,4 +11,4 @@ const LoadingButton = ({ className, children, isLoading }) => {
   );
 };
 
-export default LoadingButton;
+export default LoadingButton; 

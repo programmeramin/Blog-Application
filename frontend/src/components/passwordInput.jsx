@@ -39,5 +39,4 @@ function PasswordInput({ className, disabled, ...props }) {
   );
 }
 
-export { PasswordInput };
-
+export { PasswordInput }; 

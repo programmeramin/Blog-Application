@@ -125,4 +125,4 @@ const MobileSearch = ({ value, onChange, onSubmit }) => {
   );
 };
 
-export default SearchInput;
+export default SearchInput; 
