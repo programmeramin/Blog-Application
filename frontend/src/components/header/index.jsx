@@ -17,7 +17,7 @@ const Header = () => {
   const { pathname } = useLocation();
   const isAuthPage = pathname.includes('auth');
   return (
-    <header className="fixed h-[70px] inset-x-0 border-b bg-background">
+    <header className="fixed top-0 left-0 right-0 h-[70px] border-b bg-background/95 backdrop-blur-sm z-50 shadow-sm">
       <Container className="flex h-full items-center justify-between gap-14">
         <div className="flex items-center gap-4">
           <MobileSidebar />
