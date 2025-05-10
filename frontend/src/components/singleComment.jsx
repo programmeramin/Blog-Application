@@ -2,7 +2,7 @@ import React from 'react';
 import { useDeleteCommentMutation } from '@/features/comments/commentApi';
 import { useSelector } from 'react-redux';
 
-const SingleComment = ({ comment }) => {
+const SingleComment = ({ comment, postId }) => {
   const [deleteComment] = useDeleteCommentMutation();
 
   const user = useSelector(state => state.auth.user);
@@ -12,7 +12,7 @@ const SingleComment = ({ comment }) => {
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this comment?')) {
       try {
-        await deleteComment(comment._id).unwrap();
+        await deleteComment({ commentId: comment._id, postId }).unwrap();
       } catch (err) {
         console.error('Delete failed:', err);
       }

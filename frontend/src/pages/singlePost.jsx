@@ -1,4 +1,5 @@
 import React from 'react';
+import { ThumbsUp, ThumbsDown } from 'lucide-react';
 import { useParams, Link } from 'react-router'; //
 import {
   useLikePostMutation,
@@ -8,6 +9,7 @@ import {
 import Comments from '@/components/comments';
 import PostMenuActions from '@/components/postMenuActions';
 import { useSelector } from 'react-redux';
+import { placeholderUserImage } from '@/constants';
 
 const SinglePost = () => {
   const { postId } = useParams();
@@ -72,38 +74,39 @@ const SinglePost = () => {
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-8">
               <img
-                src={post?.author?.avatar || '/default-avatar.png'}
+                src={post?.author?.image || placeholderUserImage}
                 alt={post?.author?.username || 'Author'}
                 className="rounded-2xl w-16 h-16 object-cover"
               />
-              <Link className="text-blue-800">{post?.author?.usernam}</Link>
+              <Link className="text-blue-800">{post?.author?.username}</Link>
             </div>
             <div className="flex gap-2">
               <Link>FB</Link>
               <Link>IG</Link>
             </div>
           </div>
-
-          {/* Like/Dislike Buttons */}
-          <div className="mt-8 flex gap-4">
-            <button
-              onClick={handleLike}
-              className="px-4 py-2 bg-green-600 text-white rounded-xl"
-            >
-              👍 {post?.likes?.length || 0}
-            </button>
-            <button
-              onClick={handleDislike}
-              className="px-4 py-2 bg-red-600 text-white rounded-xl"
-            >
-              👎 {post?.dislikes?.length || 0}
-            </button>
-          </div>
           {/* For Delete and Edit post */}
           {canManagePost && <PostMenuActions postId={postId} />}
         </div>
       </div>
+      {/* Like/Dislike Buttons */}
+      <div className="flex justify- gap-6 mt-10">
+        <button
+          onClick={handleLike}
+          className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-tr from-green-500 to-emerald-600 text-white font-medium rounded-xl shadow hover:scale-105 hover:shadow-lg transition-all border border-green-600"
+        >
+          <ThumbsUp className="w-5 h-5" />
+          <span>{post?.likes?.length || 0}</span>
+        </button>
 
+        <button
+          onClick={handleDislike}
+          className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-tr from-red-500 to-rose-600 text-white font-medium rounded-xl shadow hover:scale-105 hover:shadow-lg transition-all border border-red-600"
+        >
+          <ThumbsDown className="w-5 h-5" />
+          <span>{post?.dislikes?.length || 0}</span>
+        </button>
+      </div>
       {/* Comments */}
       <Comments postId={postId} />
     </div>

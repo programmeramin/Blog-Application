@@ -6,6 +6,7 @@ import mongoDBConnect from './config/MongoDB.js';
 import authRoute from './routes/authRoute.js';
 import postRoute from './routes/postRoute.js';
 import userRoutes from './routes/userRoute.js'
+import commentRoute from './routes/commentRoutes.js';
 
 // dotenv config
 dotenv.config();
@@ -31,6 +32,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoutes);
 app.use('/api/blog', postRoute);
+app.use("/api/comments", commentRoute);
 
 // lisetening server
 app.listen(PORT, () => {

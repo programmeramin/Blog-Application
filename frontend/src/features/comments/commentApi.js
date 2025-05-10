@@ -21,7 +21,7 @@ export const commentApi = createApi({
       query: ({ postId, text }) => ({
         url: '/comments',
         method: 'POST',
-        body: { postId, text }, // matches backend addComment controller
+        body: { postId, text },
       }),
       invalidatesTags: (_result, _error, { postId }) => [
         { type: 'Comments', id: postId },
@@ -46,8 +46,9 @@ export const commentApi = createApi({
         url: `/comments/${commentId}`,
         method: 'DELETE',
       }),
-      // No postId available here unless you pass it, so just broadly invalidate
-      invalidatesTags: ['Comments'],
+      invalidatesTags: (_result, _error, { postId }) => [
+        { type: 'Comments', id: postId },
+      ],
     }),
   }),
 });
