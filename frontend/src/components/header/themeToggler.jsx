@@ -51,4 +51,4 @@ export function ThemeToggler({ className, showLabel }) {
       </PopoverContent>
     </Popover>
   );
-}
+} 

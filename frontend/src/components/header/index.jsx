@@ -1,15 +1,15 @@
 import React from 'react';
 import Container from '../container';
 import Logo from '../logo';
-import NavLinks from './nav-links';
-import SearchInput from './search-input';
-import { ThemeToggler } from './theme-toggler';
+import NavLinks from './navLinks';
+import SearchInput from './searchInput';
+import { ThemeToggler } from './themeToggler';
 import { buttonVariants } from '../ui/button';
 import { Edit } from 'lucide-react';
-import MobileSidebar from './mobile-sidebar';
+import MobileSidebar from './mobileSidebar';
 import { Link, useLocation } from 'react-router';
 import { cn } from '@/lib/utils';
-import { UserButton } from '../user-button';
+import { UserButton } from '../userButton';
 import { useSelector } from 'react-redux';
 
 const Header = () => {

@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 import Logo from "../logo";
 import { navLinks } from "@/constants";
 import { Link, useLocation } from "react-router";
-import { ThemeToggler } from "./theme-toggler";
+import { ThemeToggler } from "./themeToggler";
 
 const MobileSidebar = () => {
   const { pathname } = useLocation();
@@ -64,4 +64,4 @@ const MobileSidebar = () => {
   );
 };
 
-export default MobileSidebar;
+export default MobileSidebar; 
