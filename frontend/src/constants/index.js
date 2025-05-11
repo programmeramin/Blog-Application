@@ -1,7 +1,7 @@
 import { Edit, Home, Phone, User2 } from "lucide-react";
 
 export const mockUser = {
-  name: "Elon Mask",
+  name: "Elon Musk",
   username: "elon_mask",
   email: "elonmask@gmail.com",
   imageUrl:
@@ -32,7 +32,7 @@ export const navLinks = [
   },
 ];
 
-export const BASE_URL = 'http://localhost:5050/api';
+export const BASE_URL = 'https://blog-application-2-lbpm.onrender.com/api';
 
 export const placeholderUserImage = "/placeholder-user.webp";
 
