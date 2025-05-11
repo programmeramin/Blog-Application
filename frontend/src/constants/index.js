@@ -32,7 +32,11 @@ export const navLinks = [
   },
 ];
 
+<<<<<<< HEAD
 export const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+=======
+export const BASE_URL = 'https://blog-application-2-lbpm.onrender.com/api';
+>>>>>>> 203bbe4ba60dbae30c2d1e5e7c561dc630628bdf
 
 export const placeholderUserImage = "/placeholder-user.webp";
 
