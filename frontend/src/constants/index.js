@@ -1,7 +1,7 @@
 import { Edit, Home, Phone, User2 } from "lucide-react";
 
 export const mockUser = {
-  name: "Elon Musk",
+  name: "Elon Mask",
   username: "elon_mask",
   email: "elonmask@gmail.com",
   imageUrl:
