@@ -17,6 +17,11 @@ export const UserButton = () => {
   const { user } = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
 
+  // If user is not available yet, don't render the button
+  if (!user) {
+    return null;
+  }
+
   const handleLogout = async () => {
     try {
       await logout().unwrap();
@@ -65,7 +70,7 @@ export const UserButton = () => {
       >
         <span className="relative overflow-hidden size-9 rounded-full">
           <img
-            src={user.imageUrl || placeholderUserImage}
+            src={user?.imageUrl || placeholderUserImage}
             alt="Avatar"
             className="rounded-full"
           />
@@ -75,13 +80,13 @@ export const UserButton = () => {
       <PopoverContent className="w-[300px]" align="end">
         <div className="flex items-center gap-3">
           <img
-            src={user.imageUrl || placeholderUserImage}
+            src={user?.imageUrl || placeholderUserImage}
             alt="Avatar"
             className="rounded-full min-w-12 size-12 object-cover"
           />
           <div className="text-sm">
-            <p className="line-clamp-1">{user.email}</p>
-            <p className="leading-4 text-muted-foreground">@{user.username}</p>
+            <p className="line-clamp-1">{user?.email || 'Loading...'}</p>
+            <p className="leading-4 text-muted-foreground">@{user?.username || 'user'}</p>
           </div>
         </div>
         <ul className="flex flex-col pt-3">
