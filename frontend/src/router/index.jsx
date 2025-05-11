@@ -19,6 +19,9 @@ import VerifyEmail from '@/components/verifyEmail';
 import ForgotPassword from '@/pages/forgotPassword';
 import AllPosts from '@/pages/allPosts';
 import About from '@/pages/about';
+import Terms from '@/pages/terms';
+import Privacy from '@/pages/privacy';
+import Help from '@/pages/help';
 
 
 export const router = createBrowserRouter([
@@ -36,6 +39,18 @@ export const router = createBrowserRouter([
       {
         path: '/contact',
         element: <Contact />,
+      },
+      {
+        path: '/terms',
+        element: <Terms />,
+      },
+      {
+        path: '/privacy',
+        element: <Privacy />,
+      },
+      {
+        path: '/help',
+        element: <Help />,
       },
       {
         path: '/verify-email-notice',

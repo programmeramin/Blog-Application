@@ -118,3 +118,31 @@ export const likeBlog = async (req, res, next) => {
     next(err);
   }
 };
+
+// Search blog posts by title or content
+export const searchBlogs = async (req, res, next) => {
+  try {
+    const { query } = req.query;
+    
+    if (!query) {
+      return res.status(400).json({ message: 'Search query is required' });
+    }
+
+    // Search in title, content, or description - case insensitive
+    const blogs = await Post.find({
+      $or: [
+        { title: { $regex: query, $options: 'i' } },
+        { content: { $regex: query, $options: 'i' } },
+        { description: { $regex: query, $options: 'i' } }
+      ]
+    })
+    .select('_id title description slug category createdAt') // Only select fields we need
+    .limit(5) // Limit to 5 results for the popover
+    .sort({ createdAt: -1 }) // Sort by newest first
+    .populate('author', 'username');
+
+    res.json(blogs);
+  } catch (err) {
+    next(err);
+  }
+};
