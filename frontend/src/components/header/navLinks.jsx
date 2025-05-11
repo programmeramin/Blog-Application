@@ -3,7 +3,6 @@ import { cn } from "@/lib/utils";
 import React from "react";
 import { Link, useLocation } from "react-router";
 import { buttonVariants } from "../ui/button";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 const NavLinks = () => {

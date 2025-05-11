@@ -22,7 +22,7 @@ const About = () => {
             Discover Our Story
           </h2>
           <p className="text-gray-700 text-lg mb-6 leading-relaxed">
-            Welcome to <span className="font-semibold text-indigo-600">QuillQuest</span> — your gateway to a world where stories breathe, creativity flows, and voices are heard. 
+            Welcome to <span className="font-semibold text-indigo-600">Typeflow</span> — your gateway to a world where stories breathe, creativity flows, and voices are heard. 
             We’re building a community where writers and readers alike can connect, create, and inspire one another.
             Dive into rich narratives, craft your own adventures, and share your perspective with the world.
           </p>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Field, Label, Switch } from '@headlessui/react';
+import { Link } from 'react-router';
 
 const Contact = () => {
   const [agreed, setAgreed] = useState(false);
@@ -132,7 +133,7 @@ const Contact = () => {
             </Switch>
             <Label className="text-sm text-gray-600">
               By selecting this, you agree to our{' '}
-              <a href="#" className="font-semibold text-indigo-600">privacy&nbsp;policy</a>.
+              <Link to="/privacy" className="text-blue-600 hover:underline">Privacy Policy</Link>.
             </Label>
           </Field>
         </div>

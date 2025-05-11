@@ -5,7 +5,7 @@ import { Link } from 'react-router'
 const Logo = ({className}) => {
   return (
     <Link to="/" className={cn(className)}>
-      <img src="/logo.svg" alt="Logo" width={145} height={41} className='min-w-[145px]'/>
+      <img src="/typeflow.png" alt="Logo" width={145} height={41} className='min-w-[145px]'/>
     </Link>
   )
 }
