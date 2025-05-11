@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { ThumbsUp, ThumbsDown, Calendar, User, Bookmark } from 'lucide-react';
-import { useParams, Link } from 'react-router'; //
+import { useParams, Link } from 'react-router'; 
 import {
   useLikePostMutation,
   useDislikePostMutation,
@@ -13,8 +13,6 @@ import { placeholderUserImage } from '@/constants';
 import OptimizedImage from '@/components/OptimizedImage';
 import parse from 'html-react-parser';
 
-// NOTE: Install html-react-parser using: npm install html-react-parser --save
-// Then uncomment the import below:
 
 const SinglePost = () => {
   const { postId } = useParams();
@@ -27,12 +25,10 @@ const SinglePost = () => {
   const canManagePost =
     user && (user._id === post?.author?._id || user.role === 'admin');
 
-  // Update page title and meta description for SEO
   useEffect(() => {
     if (post) {
       document.title = `${post.title} | Blog Application`;
       
-      // Create a meta description if it doesn't exist
       let metaDescription = document.querySelector('meta[name="description"]');
       if (!metaDescription) {
         metaDescription = document.createElement('meta');
@@ -40,12 +36,11 @@ const SinglePost = () => {
         document.head.appendChild(metaDescription);
       }
       
-      // Set the content from post description
       metaDescription.content = post.description || 'Read this interesting blog post';
     }
     
     return () => {
-      document.title = 'Blog Application'; // Reset title on unmount
+      document.title = 'Blog Application'; 
     };
   }, [post]);
 
@@ -84,7 +79,6 @@ const SinglePost = () => {
     dislikePost(postId);
   };
 
-  // Extract headings for table of contents
   const extractHeadings = (content) => {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = content;
@@ -109,16 +103,13 @@ const SinglePost = () => {
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
-  // Post content with parsed HTML (safe)
   const renderContent = () => {
     if (!post?.content) return null;
     
-    // If html-react-parser is available, use it
     if (typeof parse !== 'undefined') {
       return parse(post.content);
     }
     
-    // Fallback to dangerouslySetInnerHTML with improved styling for headers
     return (
       <div 
         className="blog-content" 

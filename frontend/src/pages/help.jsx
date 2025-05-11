@@ -32,7 +32,6 @@ const Help = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // This would normally send the data to your backend
     alert('Your message has been submitted. We will get back to you shortly.');
     setContactForm({
       name: '',

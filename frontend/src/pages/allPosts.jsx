@@ -19,7 +19,6 @@ const AllPosts = () => {
     setSelectedSort(sort);
   }, [searchParams]);
 
-  // Handler to update both state + URL
   const handleFilterChange = ({ cat, sort }) => {
     const params = new URLSearchParams();
 
