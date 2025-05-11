@@ -13,7 +13,7 @@ const PostMenuActions = ({ postId }) => {
     if (confirm) {
       try {
         await deletePost(postId).unwrap();
-        navigate('/'); // redirect to homepage after deletion
+        navigate('/'); 
       } catch (err) {
         console.error('Delete failed:', err);
         alert('Failed to delete post!');

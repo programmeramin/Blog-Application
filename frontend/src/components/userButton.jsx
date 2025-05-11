@@ -17,7 +17,6 @@ export const UserButton = () => {
   const { user } = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
 
-  // If user is not available yet, don't render the button
   if (!user) {
     return null;
   }

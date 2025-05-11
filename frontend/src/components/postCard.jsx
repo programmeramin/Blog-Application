@@ -16,7 +16,6 @@ const PostCard = ({ post }) => {
       <p className="text-gray-700 dark:text-gray-300">
         {post.content.substring(0, 100)}...
       </p>
-      {/* You can add a "Read More" button later */}
     </div>
   );
 };

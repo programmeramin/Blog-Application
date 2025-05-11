@@ -5,7 +5,6 @@ import OptimizedImage from './OptimizedImage';
 const PostListItem = ({ post }) => {
   if (!post) return null;
 
-  // Ensure we have a valid image URL or use placeholder
   const imageUrl = post.image || '/default-placeholder.png';
 
   return (
@@ -18,7 +17,7 @@ const PostListItem = ({ post }) => {
               src={imageUrl}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               alt={post.title || 'Blog Post Cover'}
-              placeholder="empty" // Using empty placeholder for better performance with Cloudinary images
+              placeholder="empty" 
             />
             {post.category && (
               <div className="absolute top-3 left-3 sm:top-4 sm:left-4">

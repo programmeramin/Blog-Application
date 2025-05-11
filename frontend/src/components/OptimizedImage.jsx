@@ -1,19 +1,7 @@
 import { useState, useEffect } from 'react';
 import { cn } from '../lib/utils';
 
-/**
- * OptimizedImage Component
- * 
- * Features:
- * - Lazy loading
- * - Responsive sizes
- * - Alt text for accessibility
- * - Blur placeholder
- * - Tailwind utility support
- * - WebP support
- * - Loading attribute
- * - Cloudinary URL support
- */
+
 const OptimizedImage = ({
   src,
   alt,

@@ -4,7 +4,6 @@ import OptimizedImage from './OptimizedImage';
 import { useGetAllPostsQuery } from '@/features/posts/postApi';
 
 const FeaturePosts = () => {
-  // Fetch all posts with 'newest' sort parameter
   const { data: posts, isLoading, error } = useGetAllPostsQuery({ sort: 'newest' });
   
   // If loading, show skeleton UI

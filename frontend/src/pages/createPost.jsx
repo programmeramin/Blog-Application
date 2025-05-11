@@ -44,7 +44,7 @@ const CreatePost = () => {
       setDescription('');
       setContent('');
       setCoverImage(null);
-      navigate('/'); // if using react-router
+      navigate('/'); 
     } catch (err) {
       console.error('❌ Failed to create post:', err);
     }

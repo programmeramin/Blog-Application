@@ -15,9 +15,7 @@ const Home = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 relative z-10">
-      {/* Hero Section with Gradient Background */}
       <div className="relative overflow-hidden bg-gradient-to-r from-blue-50 to-indigo-100 rounded-xl sm:rounded-2xl md:rounded-3xl mt-2 mb-6 sm:mb-8 p-4 sm:p-6 md:p-8 lg:p-12 shadow-sm">
-        {/* Decorative Elements */}
         <div className="absolute top-0 right-0 -mt-20 -mr-20 hidden lg:block">
           <div className="w-64 h-64 rounded-full bg-blue-200 opacity-20"></div>
         </div>

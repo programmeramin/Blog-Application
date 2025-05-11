@@ -11,8 +11,7 @@ const About = () => {
         
         {/* Left Side - Image */}
         <img
-          src={heroImage} // Replace with actual path or import
-          alt="Creative workspace"
+          src={heroImage} 
           className="w-full h-auto rounded-xl object-cover shadow"
         />
 
