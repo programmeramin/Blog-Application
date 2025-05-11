@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
-const BASE_URL = 'http://localhost:5050/api';
+import { BASE_URL } from '../../constants';
 
 export const commentApi = createApi({
   reducerPath: 'commentApi',
